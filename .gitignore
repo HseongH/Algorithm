@@ -1,2 +1,3 @@
 .vscode/
 *.json
+hash/sha256.js
