@@ -12,7 +12,7 @@ function ChainedHash(capacity) {
         if (key === parseInt(key)) {
             return key % this.capacity;
         }
-        return parseInt(SHA256(key), 16);
+        return parseInt(SHA256(key), 16) % this.capacity;
     },
 
     function search(key) {
