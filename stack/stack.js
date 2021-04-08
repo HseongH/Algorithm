@@ -4,11 +4,11 @@ function FixedStack(capacity = 256) {
     this.ptr = 0,
 
     function Empty() {
-
+        console.error('스택이 비어 있습니다.');
     },
 
     function Full() {
-
+        console.error('스택이 가득 차 있습니다.');
     },
 
     function isEmpty() {
@@ -29,7 +29,7 @@ function FixedStack(capacity = 256) {
         }
 
         this.stk[this.ptr] = value;
-        this.ptr += 1;
+        this.ptr++;
     },
 
     function pop() {
@@ -37,7 +37,7 @@ function FixedStack(capacity = 256) {
             throw FixedStack.Empty();
         }
 
-        this.ptr -= 1;
+        this.ptr--;
         return this.stk[this.ptr];
     },
 
@@ -81,7 +81,7 @@ function FixedStack(capacity = 256) {
 
     function dump() {
         if (this.isEmpty) {
-            console.log('스택이 비어 있습니다.');
+            throw FixedStack.Empty();
         } else {
             const printArr = [];
 
