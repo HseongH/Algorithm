@@ -1,21 +1,12 @@
 r, g, b = map(int, input().split())
-arr = [0] * 3
+number_of_cases = r * g * b
+arr = [0, 0, 0]
+gb = g * b
 
-def color():
-    while arr[0] < r:
-        arr[2] = 0
+for i in range(number_of_cases):
+    arr[2] = i % b
+    arr[1] = (i // b) % g
+    arr[0] = i // gb
+    print(arr[0], arr[1], arr[2])
 
-        for i in range(b):
-            arr[2] = i
-            print(arr[0], arr[1], arr[2])
-
-        arr[1] += 1
-        
-        if arr[1] > g - 1:
-            arr[1] = 0
-            arr[0] += 1
-
-        color()
-
-color()
-print(r * g * b)
+print(number_of_cases)
