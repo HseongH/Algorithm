@@ -1,17 +1,11 @@
 n, m = map(int, input().split())
 
-print('+', end='')
-print('-' * (n - 2), end='')
-print('+')
-
 for i in range(m):
-    if i % 2 == 0:
-        print()
+    if i == 0 or i == m - 1:
+        print('+', end='')
+        print('-' * (n - 2), end='')
+        print('+')
         continue
     print('|', end='')
     print(' ' * (n - 2), end='')
     print('|')
-
-print('+', end='')
-print('-' * (n - 2), end='')
-print('+')
