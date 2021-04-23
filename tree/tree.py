@@ -34,64 +34,59 @@ class NodeMgmt:
             else:
                 current_node = current_node.right
         return False
-    
+
     def search_node(self, value):
         current_node = self.root
-        
-        while current_node:
-            if value < current_node.value:
-                if current_node.left is None:
-                    return [current_node, None]
-                if value == current_node.left.value:
-                    return [current_node, current_node.left]
+        parent_node = self.root
+
+        while current_node is not None:
+            if value == current_node.value:
+                return [current_node, parent_node]
+            elif value < current_node.value:
+                parent_node = current_node
                 current_node = current_node.left
             else:
-                if current_node.right is None:
-                    return [current_node, None]
-                if value == current_node.right.value:
-                    return [current_node, current_node.right]
+                parent_node = current_node
                 current_node = current_node.right
-    
+
     def remove(self, value):
-        parent_node, remove_node = self.search_node(value)
-        
-        if remove_node is None:
+        current_node, parent_node = self.search_node(value)
+                
+        if current_node is None:
             return False
-        
-        if remove_node.left is None and remove_node.right is None:
+
+        if current_node.left is None and current_node.right is None:
             if value < parent_node.value:
                 parent_node.left = None
             else:
                 parent_node.right = None
-                
-            del remove_node
-            return True
-        elif remove_node.left and remove_node.right:
-            child_parent = remove_node
-            child_node = remove_node.right
-            
-            while child_node.left:
-                child_parent = child_node
-                child_node = child_node.left
-            
-            if child_node.right:
-                child_parent.left = child_node.right
-            if value < parent_node.value:
-                parent_node.left = child_node
+        elif current_node.left and current_node.right:
+            change_node_parent = current_node
+            change_node = current_node.right
+
+            while change_node.left:
+                change_node_parent = change_node
+                change_node = change_node.left
+
+            if change_node.right:
+                change_node_parent.left = change_node.right
             else:
-                parent_node.right = child_node
+                change_node_parent.left = None
+
+            if value < parent_node.value:
+                parent_node.left = change_node
+            else:
+                parent_node.right = change_node
                 
-            child_node.left = remove_node.left
-            child_node.right = remove_node.right
-            del remove_node
-            return True
+            change_node.left = current_node.left
+            change_node.right = current_node.right
         else:
-            child_node = remove_node.left or remove_node.right
-            
+            child_node = current_node.left or current_node.right
+
             if value < parent_node.value:
                 parent_node.left = child_node
             else:
                 parent_node.right = child_node
                 
-            del remove_node
-            return True
+        del current_node
+        return True
