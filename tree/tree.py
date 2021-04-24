@@ -64,14 +64,16 @@ class NodeMgmt:
             change_node_parent = current_node
             change_node = current_node.right
 
-            while change_node.left:
-                change_node_parent = change_node
-                change_node = change_node.left
+            if change_node.left:
+                while change_node.left:
+                    change_node_parent = change_node
+                    change_node = change_node.left
 
-            if change_node.right:
-                change_node_parent.left = change_node.right
-            else:
-                change_node_parent.left = None
+                if change_node.right:
+                    change_node_parent.left = change_node.right
+                else:
+                    change_node_parent.left = None
+                change_node.right = current_node.right
 
             if value < parent_node.value:
                 parent_node.left = change_node
@@ -79,7 +81,6 @@ class NodeMgmt:
                 parent_node.right = change_node
                 
             change_node.left = current_node.left
-            change_node.right = current_node.right
         else:
             child_node = current_node.left or current_node.right
 
