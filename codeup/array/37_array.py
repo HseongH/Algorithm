@@ -7,7 +7,7 @@ for i in range(n + m - 1):
         for k in range(n):
             if j + k == i:
                 num += 1
-                arr[k][j] = num
+                arr[n - k - 1][j] = num
                 break
 
 for i in arr:
