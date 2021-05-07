@@ -1,18 +1,12 @@
 n, m = map(int, input().split())
-card = list(map(int, input().split()))
-score = []
+count = list(map(int, input().split()))
+result = []
 
-for i in card:
-    for j in card:
-        if i == j:
-            continue
-        for k in card:
-            if j == k or i == k:
-                continue
+for i in range(n):
+    for j in range(i + 1, n):
+        for k in range(j + 1, n):
+            sum = count[i] + count[j] + count[k]
+            if sum <= m:
+                result.append(sum)
 
-            total = i + j + k
-
-            if m - total >= 0:
-                score.append(total)
-
-print(max(score))
+print(max(result))

@@ -1,24 +1,17 @@
-inp = list(map(int, input().split()))
+arr = list(map(int, input().split()))
 
-if inp[0] == 1:
-    for i, scale in enumerate(inp):
-        try:
-            if scale + 1 != inp[i + 1]:
-                print('mixed')
-                break
-        except IndexError:
-            pass
-    else:
-        print('ascending')
-elif inp[0] == 8:
-    for i, scale in enumerate(inp):
-        try:
-            if scale - 1 != inp[i + 1]:
-                print('mixed')
-                break
-        except IndexError:
-            pass
-    else:
-        print('descending')
+ascending = True
+descending = True
+
+for i in range(len(arr) - 1):
+    if arr[i] < arr[i + 1]:
+        descending = False
+    if arr[i] > arr[i + 1]:
+        ascending = False
+
+if ascending:
+    print('ascending')
+elif descending:
+    print('descending')
 else:
     print('mixed')
