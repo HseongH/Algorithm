@@ -7,7 +7,7 @@ def insertion_sort(data):
             if data[j - 1] <= data[j]:
                 break
             data[j - 1], data[j] = data[j], data[j - 1]
-
+    
     return data
 
 print(insertion_sort([1, 1, 5, 3, 2, 9, 6, 5, 4, 12]))

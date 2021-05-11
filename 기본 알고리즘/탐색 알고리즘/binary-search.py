@@ -23,13 +23,13 @@ def bin_search(data, search):
 # contains 여부 탐색
 def binary_search(data, search):
     while len(data) > 0:
-        center = len(data) // 2
-        if data[center] == search:
+        pc = len(data) // 2
+        if data[pc] == search:
             return True
-        elif data[center] < search:
-            data = data[center + 1:]
+        elif data[pc] < search:
+            data = data[pc + 1:]
         else:
-            data = data[:center]
+            data = data[:pc]
     return False
 
 # 재귀용법으로 구현
@@ -38,16 +38,16 @@ def recur_bin_search(data, search):
         return True
     elif len(data) == 1 and data[0] != search:
         return False
-    elif len(data) < 1:
+    elif len(data) <= 0:
         return False
-
-    center = len(data) // 2
-    if data[center] == search:
+    
+    pc = len(data) // 2
+    if data[pc] == search:
         return True
-    elif data[center] < search:
-        return recur_bin_search(data[center + 1:], search)
+    elif data[pc] < search:
+        return recur_bin_search(data[pc + 1:], search)
     else:
-        return recur_bin_search(data[:center], search)
+        return recur_bin_search(data[:pc], search)
 
 data_list = [1, 2, 5, 6, 10, 12, 25, 63]
-print(recur_bin_search(data_list, 12))
+print(recur_bin_search(data_list, 3))

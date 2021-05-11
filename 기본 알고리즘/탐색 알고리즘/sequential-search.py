@@ -8,4 +8,4 @@ def sequential_search(data, search):
     return -1
 
 data_list = [1, 2, 5, 6, 10, 12, 25, 63]
-print(sequential_search(data_list, 3))
+print(sequential_search(data_list, 25))

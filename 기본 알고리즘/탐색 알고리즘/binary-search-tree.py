@@ -10,98 +10,96 @@ class Node:
         self.right = None
 
 class BinSearchTree:
-    def __init__(self, root) -> None:
-        self.root = Node(root)
-    
+    def __init__(self, value) -> None:
+        self.root = Node(value)
+
     def insert(self, value) -> bool:
-        current_node = self.root
+        p = self.root
 
         while True:
-            if value == current_node.value:
-                break
-            if value < current_node.value:
-                if current_node.left is None:
-                    current_node.left = Node(value)
+            if value == p.value:
+                return False
+            if value < p.value:
+                if p.left is None:
+                    p.left = Node(value)
                     return True
-                current_node = current_node.left
+                p = p.left
             else:
-                if current_node.right is None:
-                    current_node.right = Node(value)
+                if p.right is None:
+                    p.right = Node(value)
                     return True
-                current_node = current_node.right
-
-        return False
+                p = p.right
 
     def search(self, value) -> bool:
-        current_node = self.root
+        p = self.root
 
-        while current_node:
-            if value == current_node.value:
+        while p:
+            if value == p.value:
                 return True
-            elif value < current_node.value:
-                current_node = current_node.left
+            elif value < p.value:
+                p = p.left
             else:
-                current_node = current_node.right
-
-        return False
-
-    def search_node(self, value) -> Any:
-        current_node = self.root
-        parent_node = self.root
-
-        while current_node:
-            if value == current_node.value:
-                return [current_node, parent_node]
-            elif value < current_node.value:
-                parent_node = current_node
-                current_node = current_node.left
-            else:
-                parent_node = current_node
-                current_node = current_node.right
+                p = p.right
         
-        return [current_node, parent_node]
+        return False
+    
+    def search_node(self, value) -> Any:
+        parent_node = self.root
+        p = self.root
+
+        while p:
+            if value == p.value:
+                break
+            elif value <= p.value:
+                parent_node = p
+                p = p.left
+            else:
+                parent_node = p
+                p = p.right
+
+        return [p, parent_node]
 
     def remove(self, value) -> bool:
-        remove_node, parent_node = self.search_node(value)
+        p, parent_node = self.search_node(value)
 
-        if remove_node is None:
+        if p is None:
             return False
 
-        if remove_node.left is None and remove_node.right is None:
+        if p.left is None and p.right is None:
             if value < parent_node.value:
                 parent_node.left = None
             else:
                 parent_node.right = None
-        elif remove_node.left and remove_node.right:
-            child_parent = remove_node
-            child_node = remove_node.left
-            swap = False
+        elif p.left and p.right:
+            change_parent = p
+            change_node = p.right
+            execution = False
 
-            while child_node.right:
-                child_parent = child_node
-                child_node = child_node.right
-                swap = True
-
-            if swap:
-                if child_node.left:
-                    child_parent.right = child_node.left
+            while change_node.left:
+                change_parent = change_node
+                change_node = change_node.left
+                execution = True
+            
+            if execution:
+                if change_node.right:
+                    change_parent.left = change_node.right
                 else:
-                    child_parent.right = None
-                child_node.left = remove_node.left
+                    change_parent.left = None
+                change_node.right = p.right
 
             if value < parent_node.value:
-                parent_node.left = child_node
+                parent_node.left = change_node
             else:
-                parent_node.right = child_node
+                parent_node.right = change_node
                 
-            child_node.right = remove_node.right
+            change_node.left = p.left
         else:
-            child_node = remove_node.left or remove_node.right
+            child_node = p.left or p.right
 
             if value < parent_node.value:
                 parent_node.left = child_node
             else:
                 parent_node.right = child_node
-
-        del remove_node
+        
+        del p
         return True

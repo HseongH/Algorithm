@@ -9,21 +9,19 @@ def fibonacci(num):
         return num
     return fibonacci(num - 1) + fibonacci(num - 2)
 
-for i in range(1, 11):
-    print(fibonacci(i))
-
 # 동적 계획법으로 구현하기
 def fibo(num):
-    if num <= 0:
+    if num <= 1:
         return num
     
-    fibo_arr = [0 for _ in range(num + 1)]
-    fibo_arr[1] = 1
+    arr = [0 for _ in range(num + 1)]
+    arr[1] = 1
 
-    for i in range(2, num + 1):
-        fibo_arr[i] = fibo_arr[i - 1] + fibo_arr[i - 2]
-
-    return fibo_arr[num]
+    for i  in range(2, num + 1):
+        arr[i] = arr[i - 1] + arr[i - 2]
+    
+    return arr[num]
 
 for i in range(1, 11):
+    print(fibonacci(i))
     print(fibo(i))

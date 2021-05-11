@@ -5,10 +5,11 @@ def selected_sort(data):
     for i in range(len(data) - 1):
         min = i
         for j in range(i + 1, len(data)):
-            if data[min] > data[j]:
+            if data[j] < data[min]:
                 min = j
-        if i != min:
-            data[i], data[min] = data[min], data[i]
+        if min != i:
+            data[min], data[i] = data[i], data[min]
+
     return data
 
 print(selected_sort([1, 1, 5, 3, 2, 9, 6, 5, 4, 12]))

@@ -6,9 +6,7 @@ def quick_sort(data):
         return data
 
     pivot = data[0]
-
-    left = []
-    right = []
+    left, right = list(), list()
 
     for i in range(1, len(data)):
         if data[i] < pivot:
@@ -24,12 +22,11 @@ print(quick_sort([1, 1, 5, 3, 2, 9, 6, 5, 4, 12]))
 def q_sort(data):
     if len(data) <= 1:
         return data
-
+    
     pivot = data[0]
-    left = [ item for item in data[1:] if item < pivot ]
-    right = [ item for item in data[1:] if item >= pivot ]
+    left = [item for item in data[1:] if item < pivot]
+    right = [item for item in data[1:] if item >= pivot]
 
-    return quick_sort(left) + [pivot] + quick_sort(right)
+    return q_sort(left) + [pivot] + q_sort(right)
 
 print(q_sort([1, 1, 5, 3, 2, 9, 6, 5, 4, 12]))
-

@@ -21,31 +21,31 @@ print(sum_list([1, 2, 3, 4, 5]))
 def palin(string):
     if len(string) <= 1:
         return True
-    if string[0] != string[-1]:
-        return False
-    return palin(string[1:-1])
+    if string[0] == string[-1]:
+        return palin(string[1:-1])
+    return False
 
 print(palin('tenet'))
 
 # 숫자 1로 만들기
-def make_it_the_number_1(num):
-    print(num)
-    if num <= 1:
-        return num
-    if num % 2 == 1:
-        return make_it_the_number_1(3 * num + 1)
-    return make_it_the_number_1(num // 2)
+# def make_it_the_number_1(num):
+#     print(num)
+#     if num <= 1:
+#         return num
+#     if num % 2 == 1:
+#         return make_it_the_number_1(3 * num + 1)
+#     return make_it_the_number_1(num // 2)
 
-print(make_it_the_number_1(13))
+# print(make_it_the_number_1(13))
 
 # 정수를 1과 2와 3의 합으로 나타내기
-def func(data):
-    if data == 1:
-        return 1
-    elif data == 2:
+def func(num):
+    if num == 1:
+        return num
+    elif num == 2:
         return 2
-    elif data == 3:
+    elif num == 3:
         return 4
-    return func(data - 1) + func(data - 2) + func(data - 3)
+    return func(num - 1) + func(num - 2) + func(num - 3)
 
 print(func(5))
