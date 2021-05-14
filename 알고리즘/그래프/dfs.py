@@ -14,6 +14,7 @@ def dfs(graph, start_node):
 
     return visited
 
+# TEST CODE
 graph = dict()
 
 graph['A'] = ['B', 'C']
