@@ -30,15 +30,15 @@ class MinSpanningTree:
         return self.parent[node]
 
     def union(self, node_v, node_u):
-        root1 = self.parent[node_v]
-        root2 = self.parent[node_u]
+        v_root = self.parent[node_v]
+        u_root = self.parent[node_u]
 
-        if self.rank[root1] > self.rank[root2]:
-            self.parent[root2] = root1
+        if self.rank[v_root] > self.rank[u_root]:
+            self.parent[u_root] = v_root
         else:
-            self.parent[root1] = root2
-            if self.rank[root1] == self.rank[root2]:
-                self.rank[root2] += 1
+            self.parent[v_root] = u_root
+            if self.rank[v_root] == self.rank[u_root]:
+                self.rank[u_root] += 1
 
     def make_set(self, node):
         self.parent[node] = node
