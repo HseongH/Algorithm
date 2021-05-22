@@ -28,4 +28,5 @@ def n_queen(N):
     dfs(N, 0, list(), result)
     return result
 
+# TEST CODE
 print(n_queen(8))
