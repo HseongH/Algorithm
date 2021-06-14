@@ -24,51 +24,61 @@
 
 ```python
 class Node:
-    def __init__(self, value, next=None):
-        self.value = value
+    def __init__(self, data, next=None):
+        self.data = data
         self.next = next
 
 class LinkedList:
-    def __init__(self, value):
-        self.head = Node(value)
-        self.tail = self.head
+    def __init__(self, data):
+        self.head = Node(data)
 
-    def add(self, value):
-        self.tail.next = Node(value)
-        self.tail = self.tail.next
+    def get_node(self, index):
+        node = self.head
 
-    def search(self, value):
+        for _ in range(index):
+            if node is None:
+                return None
+            node = node.next
+
+        return node
+
+    def add(self, data):
         node = self.head
 
         while node.next:
-            if node.next.value == value:
-                return node
             node = node.next
-        
-        return None
 
-    def insert(self, search, value):
-        node = self.search(search)
+        node.next = Node(data)
+
+    def insert(self, index, data):
+        if index <= 0:
+            new_node = Node(data, self.head)
+            self.head = new_node
+            return 
+
+        node = self.get_node(index - 1)
 
         if node is None:
             return False
+            
+        node.next = Node(data, node.next)
 
-        node.next.next = Node(value, node.next.next)
-        return True
+    def delete(self, index):
+        if index <= 0:
+            self.head = self.head.next
+            return
 
-    def delete(self, value):
-        node = self.search(value)
+        node = self.get_node(index - 1)
 
         if node is None:
             return False
 
         node.next = node.next.next
-        return True
 
     def desc(self):
         node = self.head
 
         while node:
-            print(node.value)
+            print(node.data)
             node = node.next
 ```
