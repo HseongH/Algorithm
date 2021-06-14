@@ -43,37 +43,35 @@
 class Queue:
     def __init__(self, capacity):
         self.capacity = capacity
-        self.que = [None for _ in range(self.capacity)]
+        self.que = [None] * self.capacity
         self.front = 0
         self.rear = 0
         self.no = 0
 
     def is_empty(self):
         return self.no <= 0
-    
+
     def is_full(self):
         return self.no >= self.capacity
 
     def enqueue(self, value):
         if self.is_full():
-            raise IndexError
-        
+            return False
         self.que[self.rear] = value
         self.rear += 1
         self.no += 1
 
-        if self.rear == self.capacity:
+        if self.rear >= self.capacity:
             self.rear = 0
 
     def dequeue(self):
         if self.is_empty():
-            raise IndexError
-        
+            return False
         value = self.que[self.front]
         self.front += 1
         self.no -= 1
 
-        if self.front == self.capacity:
+        if self.front >= self.capacity:
             self.front = 0
 
         return value
@@ -83,31 +81,34 @@ class Queue:
 
 ```python
 class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
+    def __init__(self, data, next=None):
+        self.data = data
+        self.next = next
 
 class Queue:
-    def __init__(self, value):
-        self.front = Node(value)
-        self.rear = self.front
+    def __init__(self):
+        self.head = None
+        self.tail = None
 
-    def is_empty(self):
-        return self.front is None
+    def is_empty():
+        return self.head is None
 
-    def enqueue(self, value):
-        self.rear.next = Node(value)
-        self.rear = self.rear.next
+    def enqueue(self, data):
+        node = Node(data)
 
         if self.is_empty():
-            self.front = self.rear
+            self.tail = node
+            self.head = self.tail
+            return
+
+        self.tail.next = node
+        self.tail = self.tail.next
 
     def dequeue(self):
         if self.is_empty():
-            raise IndexError
+            return False
 
-        value = self.front.value
-        self.front = self.front.next
-
-        return value
+        node = self.head
+        self.head = self.head.next
+        return node.data
 ```
