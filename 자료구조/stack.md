@@ -55,12 +55,12 @@ class Stack:
 
     def pop(self):
         if self.is_empty():
-            raise IndexError
+            return False
         return self.stk.pop()
 
     def peek(self):
         if self.is_empty():
-            raise IndexError
+            return False
         return self.stk[-1]
 ```
 
@@ -70,29 +70,61 @@ class Stack:
 class Stack:
     def __init__(self, capacity):
         self.capacity = capacity
-        self.stk = [None for _ in range(self.capacity)]
+        self.stk = [None] * self.capacity
         self.ptr = 0
 
     def is_empty(self):
         return self.ptr <= 0
-    
+
     def is_full(self):
         return self.ptr >= self.capacity
 
     def push(self, value):
         if self.is_full():
-            raise IndexError
+            return False
         self.stk[self.ptr] = value
         self.ptr += 1
-    
+
     def pop(self):
         if self.is_empty():
-            raise IndexError
+            return False
         self.ptr -= 1
         return self.stk[self.ptr]
 
     def peek(self):
         if self.is_empty():
-            raise IndexError
+            return False
         return self.stk[self.ptr - 1]
+```
+
+### 링크드 리스트 형태로 구현하기
+
+```python
+class Node:
+    def __init__(self, value, next=None):
+        self.data = value
+        self.next = next
+
+class Stack:
+    def __init__(self):
+        self.head = None
+
+    def is_empty(self):
+        return self.head is None
+
+    def push(self, value):
+        node = Node(value, self.head)
+        self.head = node
+
+    def pop(self):
+        if self.is_empty():
+            return False
+        node = self.head
+        self.head = self.head.next
+        return node.data
+
+    def peek(self):
+        if self.is_empty():
+            return False
+        return self.head.data
 ```
