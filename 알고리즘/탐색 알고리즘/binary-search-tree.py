@@ -50,7 +50,7 @@ class BinSearchTree:
         while p:
             if value == p.value:
                 break
-            elif value <= p.value:
+            elif value < p.value:
                 parent_node = p
                 p = p.left
             else:
