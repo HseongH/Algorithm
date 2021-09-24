@@ -9,21 +9,24 @@ function Node(value) {
 function Queue() {
   this.front = null;
   this.rear = null;
+  this.size = 0;
 
   this.isEmpty = () => {
-    return Number(this.front === null);
+    return Number(this.size === 0);
   };
 
   this.enqueue = (value) => {
     if (this.isEmpty()) {
       this.front = new Node(value);
       this.rear = this.front;
+      this.size = 1;
 
       return;
     }
 
     this.rear.next = new Node(value);
     this.rear = this.rear.next;
+    this.size += 1;
   };
 
   this.dequeue = () => {
@@ -31,6 +34,7 @@ function Queue() {
 
     const value = this.front.value;
     this.front = this.front.next;
+    this.size -= 1;
 
     return value;
   };
@@ -48,7 +52,7 @@ for (let i = 0; i < loop; i++) {
       break;
 
     case 'size':
-      result.push(queue.length);
+      result.push(queue.size);
       break;
 
     case 'empty':
