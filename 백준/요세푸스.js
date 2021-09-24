@@ -6,11 +6,12 @@ const [n, k] = require('fs')
 
 const array = Array.from({ length: n }, (v, i) => i + 1);
 const result = [];
+let ptr = 0;
 
 while (array.length) {
-  for (let i = 0; i < k - 1; i++) array.push(array.shift());
+  ptr = (ptr + (k - 1)) % array.length;
 
-  result.push(array.shift());
+  result.push(array.splice(ptr, 1));
 }
 
 console.log(`<${result.join(', ')}>`);
