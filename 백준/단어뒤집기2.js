@@ -1,33 +1,9 @@
-const input = require('fs').readFileSync('예제.txt').toString();
-const result = [];
+const input = require('fs').readFileSync('/dev/stdin').toString().trim();
+const reg = /(<.+?>|\s)/g;
+const temp = input.split(reg);
 
-let convert = true;
-let target = [];
-
-for (let i = 0; i < input.length; i++) {
-  const word = input[i];
-
-  if (word === '<') {
-    if (target.length) {
-      result.push(target.join(''));
-      target.splice(0, target.length);
-    }
-
-    convert = false;
-  } else if (word === '>' || (word === ' ' && convert)) {
-    target.push(word);
-    result.push(target.join(''));
-    target.splice(0, target.length);
-
-    continue;
-  }
-
-  convert ? target.unshift(word) : target.push(word);
-  console.log(target);
-}
-
-if (target.length) {
-  result.push(target.join(''));
-}
+const result = temp.map((word) => {
+  return reg.test(word) ? word : word.split('').reverse().join('');
+});
 
 console.log(result.join(''));
