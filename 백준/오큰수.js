@@ -1,17 +1,16 @@
 const input = require('fs').readFileSync('/dev/stdin').toString().split('\n');
-const length = input.shift();
-const list = input
-  .shift()
-  .split(' ')
-  .map((e) => +e);
+const length = +input[0];
+const list = input[1].split(' ').map((e) => +e);
 
-const result = [];
+const stack = [];
+const result = Array.from({ length: length }, () => -1);
 
-while (list.length) {
-  const target = list.shift();
-  const answer = list.find((e) => e > target);
+for (let i = 0; i < length; i++) {
+  while (stack.length && list[stack[stack.length - 1]] < list[i]) {
+    result[stack.pop()] = list[i];
+  }
 
-  result.push(answer || -1);
+  stack.push(i);
 }
 
 console.log(result.join(' '));
