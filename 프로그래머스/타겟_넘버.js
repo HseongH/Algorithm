@@ -21,13 +21,13 @@ function solution(numbers, target) {
   recur(operator, [], numbers.length);
 
   for (let i = 0; i < operator.length; i++) {
-    let calculation = '';
+    let calculation = 'return ';
 
     for (let j = 0; j < operator[i].length; j++) {
       calculation += operator[i][j] + numbers[j];
     }
 
-    if (eval(calculation) === target) answer++;
+    if (Function(calculation)() === target) answer++;
   }
 
   return answer;
