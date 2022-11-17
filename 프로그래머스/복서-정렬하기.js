@@ -5,7 +5,9 @@ function solution(weights, head2head) {
       const none = /N/gi;
       const winCounter = cur.match(win);
       const noneCounter = cur.match(none);
-      const score = winCounter ? winCounter.length / (cur.length - noneCounter.length) : 0;
+      const score = winCounter
+        ? winCounter.length / (cur.length - noneCounter.length)
+        : 0;
       const weightTotal = weights.filter(
         (weight, j) => weights[i] < weight && cur[j] === 'W'
       ).length;
